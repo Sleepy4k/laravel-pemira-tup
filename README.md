@@ -1,4 +1,4 @@
-# Laravel Pemira HMSI
+# Laravel Pemira TUP
 
 This project is a web application built using the Laravel framework. It features a user-friendly interface for managing and participating in student elections. The application includes both user and admin dashboards, allowing users to vote in elections and admins to manage application settings and content. The application emphasizes security with authentication, authorization, and Content Security Policy (CSP) implementation.
 
@@ -36,13 +36,13 @@ This project is a web application built using the Laravel framework. It features
 Clone the project
 
 ~~~bash
-git clone https://github.com/Sleepy4k/laravel-pemira-hmsi.git
+git clone https://github.com/Sleepy4k/laravel-pemira-tup.git
 ~~~
 
 Go to the project directory
 
 ~~~bash
-cd laravel-pemira-hmsi
+cd laravel-pemira-tup
 ~~~
 
 Setup the server
