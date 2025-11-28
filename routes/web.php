@@ -24,19 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Landing\HomeController::class)->name('landing');
-Route::get('/about', Landing\AboutController::class)->name('about');
-Route::get('/timeline', Landing\TimelineController::class)->name('timeline');
-Route::get('/candidates', Landing\CandidateController::class)->name('candidates');
-
-Route::controller(Landing\VoteController::class)->group(function () {
-    Route::get('/vote', 'index')->name('vote.index');
-    Route::post('/vote/verify', 'verify')->name('vote.verify');
-    Route::get('/vote/thankyou', 'thankyou')->name('vote.thankyou');
-    Route::prefix('/vote/candidate')->group(function () {
-        Route::get('/{voter}', 'show')->name('vote.show');
-        Route::post('/{voter}/submit', 'store')->name('vote.store');
-    });
-});
+Route::get('/faq', Landing\FaqController::class)->name('faq');
+Route::get('/voting', Landing\VotingController::class)->name('voting');
 
 Route::get('storage/{path}', ServeController::class)->where('path', '.*')
     ->middleware('throttle:15,1');

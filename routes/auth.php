@@ -14,10 +14,10 @@ Route::middleware('web')->group(function () {
     | Remember not to list anything of importance, use authenticate route instead.
     */
 
-    Route::resource('signin', Auth\SigninController::class)
-        ->middleware('guest')
-        ->only(['index', 'store'])
-        ->name('index', 'signin');
+    Route::middleware('guest')->controller(Auth\SigninController::class)->group(function () {
+        Route::get('/signin', 'index')->name('signin');
+        Route::get('/signin/callback', 'store')->name('signin.callback');
+    });
 
     /*
     |--------------------------------------------------------------------------
