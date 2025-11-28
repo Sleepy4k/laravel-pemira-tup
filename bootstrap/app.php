@@ -26,6 +26,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\AddSecureHeaderRequest::class,
         ]);
 
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\CheckIsUserAdmin::class,
+        ]);
+
         $middleware->redirectGuestsTo(fn () => route('signin'));
         $middleware->redirectUsersTo(fn () => route('dashboard'));
     })

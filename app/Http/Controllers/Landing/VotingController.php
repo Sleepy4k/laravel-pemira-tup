@@ -15,7 +15,7 @@ class VotingController extends Controller
     {
         $user = auth('web')->user();
         $types = CandidateType::query()
-            ->select('id', 'name', 'description')
+            ->select('id', 'name', 'slug', 'description')
             ->orderBy('created_at', 'asc')
             ->get();
 

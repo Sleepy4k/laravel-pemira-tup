@@ -39,6 +39,7 @@ class CandidateTypeFactory extends Factory
             return [
                 'id' => array_shift($uuids),
                 'name' => $user['name'],
+                'slug' => Str::slug($user['name']),
                 'description' => $user['description'],
                 'created_at' => $currentTime,
                 'updated_at' => $currentTime,

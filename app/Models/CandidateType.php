@@ -18,6 +18,7 @@ class CandidateType extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'description',
     ];
 
@@ -31,6 +32,7 @@ class CandidateType extends Model
         return [
             'id' => 'string',
             'name' => 'string',
+            'slug' => 'string',
             'description' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

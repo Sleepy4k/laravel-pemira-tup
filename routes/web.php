@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Landing\HomeController::class)->name('landing');
 Route::get('/faq', Landing\FaqController::class)->name('faq');
 Route::get('/voting', Landing\VotingController::class)->name('voting');
+Route::get('/voting/{type:slug}/candidate', Landing\VoteCandidateController::class.'@show')->name('vote-candidate');
+Route::post('/voting/{type:slug}/{candidate}', Landing\VoteCandidateController::class.'@update')->name('vote-candidate.submit');
 
 Route::get('storage/{path}', ServeController::class)->where('path', '.*')
     ->middleware('throttle:15,1');

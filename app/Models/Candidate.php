@@ -75,14 +75,6 @@ class Candidate extends Model
     }
 
     /**
-     * Get the programs for the candidate.
-     */
-    public function programs()
-    {
-        return $this->hasMany(CandidateProgram::class, 'candidate_id');
-    }
-
-    /**
      * Get the votes for the candidate.
      */
     public function votes()
