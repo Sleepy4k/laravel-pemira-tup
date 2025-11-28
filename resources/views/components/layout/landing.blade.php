@@ -48,31 +48,29 @@
         <meta property="twitter:image:type" content="image/png">
         <meta property="twitter:image:alt" content="{{ $appSettings['app_name'] }} - {{ $title }}">
 
-        @vite(['resources/css/addon/landing.css', 'resources/js/addon/layout-landing.js'])
+        @vite([
+            'resources/css/app.css',
+            'resources/css/addon/landing.css',
+            'resources/js/lib/gsap.js',
+            'resources/js/app.js',
+            'resources/js/lib/boxicons.js',
+            'resources/js/addon/layout-landing.js'
+        ])
 
         @stack('vites')
     </head>
-    <body>
-        <div class="refresh-animation">
-            <div class="refresh-logo">
-                <div class="logo-item logo-2">
-                    <img src="{{ $appSettings['app_logo'] }}" alt="HIMASI Logo" loading="lazy">
-                </div>
-            </div>
-        </div>
-
-        <div class="pattern-overlay"></div>
-        <div class="floating-shapes">
-            <div class="shape shape1"></div>
-            <div class="shape shape2"></div>
-            <div class="shape shape3"></div>
+    <body class="bg-brand-light min-h-screen flex flex-col justify-between">
+        <div id="loader" class="fixed inset-0 bg-white flex items-center justify-center z-100">
+            <div class="loader-container"></div>
         </div>
 
         <x-landing.navbar :logo="$appSettings['app_logo']" />
 
-        {{ $slot }}
+        <main class="h-full w-full mt-[15dvh] mb-40 px-4 md:px-[81.5px] space-y-[100px] lg:space-y-[150px] xl:space-y-[200px]">
+            {{ $slot }}
+        </main>
 
-        <x-landing.footer :logo="$appSettings['app_logo']" />
+        <x-landing.footer :logo="$appSettings['app_logo']" :appName="$appSettings['app_name']" />
 
         <x-utils.noscript />
     </body>

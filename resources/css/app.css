@@ -10,17 +10,43 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 
     /* Primary Scale */
-    --color-primary-50: #FFF8F0;
-    --color-primary-100: #FEEBD7;
-    --color-primary-200: #FDD6B0;
-    --color-primary-300: #FCC48A;
-    --color-primary-400: #FBAE67;
-    --color-primary-500: #FA9A44;
-    --color-primary-600: #F98825;
-    --color-primary-700: #E57618;
-    --color-primary-800: #CC6410;
-    --color-primary-900: #B8540E;
-    --color-primary-950: #A34A0B;
+    --color-primary-50: #FEF2F2;
+    --color-primary-100: #FDE3E3;
+    --color-primary-200: #FBCACA;
+    --color-primary-300: #F8A6A6;
+    --color-primary-400: #F27575;
+    --color-primary-500: #E84545;
+    --color-primary-600: #BB0808;
+    --color-primary-700: #990606;
+    --color-primary-800: #7F0808;
+    --color-primary-900: #6B0B0B;
+    --color-primary-950: #3D0202;
+
+    /* Secondary Scale */
+    --color-secondary-50: #fdf4f4;
+    --color-secondary-100: #fbe8e8;
+    --color-secondary-200: #f7d4d4;
+    --color-secondary-300: #f1b3b3;
+    --color-secondary-400: #e88585;
+    --color-secondary-500: #d64848;
+    --color-secondary-600: #c13333;
+    --color-secondary-700: #a22626;
+    --color-secondary-800: #872323;
+    --color-secondary-900: #702222;
+    --color-secondary-950: #3d0e0e;
+
+    /* Tertiary Scale */
+    --color-tertiary-50: #fdf2f2;
+    --color-tertiary-100: #fbe6e6;
+    --color-tertiary-200: #f7d0d0;
+    --color-tertiary-300: #f1adad;
+    --color-tertiary-400: #e78282;
+    --color-tertiary-500: #d95d5d;
+    --color-tertiary-600: #c43e3e;
+    --color-tertiary-700: #a42f2f;
+    --color-tertiary-800: #882929;
+    --color-tertiary-900: #712626;
+    --color-tertiary-950: #3d1010;
 
     /* Alert & Status */
     --color-success: #03C247;
