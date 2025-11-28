@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\CandidateType;
 use Illuminate\Database\Seeder;
 
 class CandidateTypeSeeder extends Seeder
@@ -12,6 +12,10 @@ class CandidateTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        if (CandidateType::query()->withoutCache()->count() > 0) return;
+
+        $types = CandidateType::factory()->make();
+
+        CandidateType::insert($types->toArray());
     }
 }

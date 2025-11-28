@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\CandidateType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('candidates', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('head_name', 100);
-            $table->string('vice_name', 100);
-            $table->text('photo')->nullable();
-            $table->text('resume')->nullable();
-            $table->foreignIdFor(CandidateType::class)->constrained()->cascadeOnDelete();
+            $table->string('question', 100);
+            $table->text('answer');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidates');
+        Schema::dropIfExists('faqs');
     }
 };

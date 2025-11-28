@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             BatchSeeder::class,
+            CandidateTypeSeeder::class,
             VotingSessionSeeder::class,
             UserSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }
