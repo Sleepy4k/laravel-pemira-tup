@@ -20,6 +20,8 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.landing.navbar');
+        $authUser = auth('web')->user();
+        $isLoggedIn = $authUser !== null;
+        return view('components.landing.navbar', compact('isLoggedIn', 'authUser'));
     }
 }

@@ -18,10 +18,6 @@ class SignoutController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully signed out.',
-            'data' => null,
-        ]);
+        return to_route('landing');
     }
 }

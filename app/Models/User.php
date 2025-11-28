@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\AsEncrypt;
+use App\Concerns\HasUuid;
 use App\Concerns\MakeCacheable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, MakeCacheable;
+    use HasFactory, Notifiable, HasUuid, MakeCacheable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +20,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username',
-        'password',
+        'email',
+        'is_admin',
+        'batch_id',
+        'socialite_id',
+        'socialite_token',
     ];
-
-    /**
+/**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
@@ -41,8 +44,10 @@ class User extends Authenticatable
     {
         return [
             'id' => 'string',
-            'name' => 'string',
-            'username' => AsEncrypt::class,
+            'name' => AsEncrypt::class,
+            'email' => AsEncrypt::class,
+            'is_admin' => 'boolean',
+            'batch_id' => 'string',
             'password' => 'hashed',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

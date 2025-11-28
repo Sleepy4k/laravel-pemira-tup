@@ -7,7 +7,7 @@ use App\Concerns\MakeCacheable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CandidateType extends Model
+class Faq extends Model
 {
     use HasUuid, MakeCacheable, HasFactory;
 
@@ -17,8 +17,8 @@ class CandidateType extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'description',
+        'question',
+        'answer',
     ];
 
     /**
@@ -30,8 +30,8 @@ class CandidateType extends Model
     {
         return [
             'id' => 'string',
-            'name' => 'string',
-            'description' => 'string',
+            'question' => 'string',
+            'answer' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
@@ -43,14 +43,6 @@ class CandidateType extends Model
      * @return string
      */
     public function setCachePrefix(): string {
-        return 'candidate.type.cache';
-    }
-
-    /**
-     * Get the candidates for the candidate type.
-     */
-    public function candidates()
-    {
-        return $this->hasMany(Candidate::class);
+        return 'faq.cache';
     }
 }

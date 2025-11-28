@@ -6,7 +6,7 @@ use App\Concerns\HasUuid;
 use App\Concerns\MakeCacheable;
 use Illuminate\Database\Eloquent\Model;
 
-class CandidateProgram extends Model
+class VoterHistory extends Model
 {
     use HasUuid, MakeCacheable;
 
@@ -16,8 +16,9 @@ class CandidateProgram extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'candidate_id',
-        'point',
+        'user_id',
+        'candidate_type_id',
+        'voted_at',
     ];
 
     /**
@@ -29,8 +30,9 @@ class CandidateProgram extends Model
     {
         return [
             'id' => 'string',
-            'candidate_id' => 'string',
-            'point' => 'string',
+            'user_id' => 'string',
+            'candidate_type_id' => 'string',
+            'voted_at' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
@@ -42,14 +44,22 @@ class CandidateProgram extends Model
      * @return string
      */
     public function setCachePrefix(): string {
-        return 'candidate.program.cache';
+        return 'voter.history.cache';
     }
 
     /**
-     * Get the candidate that owns the program.
+     * Get the user that owns the voter history.
      */
-    public function candidate()
+    public function user()
     {
-        return $this->belongsTo(Candidate::class, 'candidate_id');
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the candidate type that owns the voter history.
+     */
+    public function candidateType()
+    {
+        return $this->belongsTo(CandidateType::class);
     }
 }

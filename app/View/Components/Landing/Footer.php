@@ -13,6 +13,7 @@ class Footer extends Component
      */
     public function __construct(
         public string $logo = '',
+        public string $appName = '',
     ) {}
 
     /**

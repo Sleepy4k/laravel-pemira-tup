@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,6 +13,11 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('landing.home');
+        $appLogo = Setting::select('group', 'key', 'value')
+            ->where('group', 'app')->where('key', 'logo')->first();
+
+        return view('landing.home', [
+            'appLogo' => $appLogo ? $appLogo->value : null,
+        ]);
     }
 }
