@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('vice_name', 100);
             $table->text('photo')->nullable();
             $table->text('resume')->nullable();
+            $table->boolean('is_blank')->default(false);
             $table->foreignIdFor(CandidateType::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

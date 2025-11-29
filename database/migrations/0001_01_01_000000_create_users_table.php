@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('email');
             $table->text('password');
             $table->boolean('is_admin')->default(false);
-            $table->string('socialite_id')->nullable()->unique();
-            $table->string('socialite_token')->nullable();
+            $table->text('socialite_id')->nullable();
+            $table->text('socialite_token')->nullable();
             $table->timestamps();
         });
 
