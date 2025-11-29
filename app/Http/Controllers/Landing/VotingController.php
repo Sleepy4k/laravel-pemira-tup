@@ -19,6 +19,16 @@ class VotingController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        return view('landing.voting', compact('types', 'user'));
+        // get user's voter history to hide the types they have voted for
+        $votedTypeIds = $user->load('voterHistories')
+            ->voterHistories
+            ->pluck('candidate_type_id')
+            ->toArray();
+
+        $types = $types->filter(function ($type) use ($votedTypeIds) {
+            return !in_array($type->id, $votedTypeIds);
+        })->values();
+
+        return view('landing.voting', compact('types', 'user', 'votedTypeIds'));
     }
 }

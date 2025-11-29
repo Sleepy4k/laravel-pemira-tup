@@ -20,9 +20,10 @@ class BasicPolicy implements Preset
     {
         $policy
             ->add([Directive::BASE, Directive::DEFAULT], Keyword::SELF)
-            ->add([Directive::FORM_ACTION, Directive::MEDIA, Directive::FRAME], Keyword::SELF)
+            ->add([Directive::FORM_ACTION, Directive::MEDIA], Keyword::SELF)
             ->add([Directive::MANIFEST, Directive::CHILD, Directive::CONNECT], Keyword::SELF)
             ->add([Directive::OBJECT], Keyword::SELF)
+            ->add([Directive::FRAME], [Keyword::SELF, Scheme::DATA])
             ->add([Directive::FONT], [Keyword::SELF, Scheme::DATA])
             ->add([Directive::BLOCK_ALL_MIXED_CONTENT], Value::NO_VALUE);
 

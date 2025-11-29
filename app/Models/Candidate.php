@@ -21,7 +21,8 @@ class Candidate extends Model
         'vice_name',
         'photo',
         'resume',
-        'attachment',
+        'is_blank',
+        'candidate_type_id',
     ];
 
     /**
@@ -36,6 +37,8 @@ class Candidate extends Model
             'number' => 'integer',
             'head_name' => 'string',
             'vice_name' => 'string',
+            'is_blank' => 'boolean',
+            'candidate_type_id' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
@@ -72,6 +75,14 @@ class Candidate extends Model
     public function vision()
     {
         return $this->hasOne(CandidateVision::class, 'candidate_id');
+    }
+
+    /**
+     * Get the candidate type for the candidate.
+     */
+    public function candidateType()
+    {
+        return $this->belongsTo(CandidateType::class, 'candidate_type_id');
     }
 
     /**

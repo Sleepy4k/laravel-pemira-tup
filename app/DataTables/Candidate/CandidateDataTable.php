@@ -88,15 +88,8 @@ class CandidateDataTable extends DataTable
 
                 return '-';
             })
-            ->addColumn('attachment_url', function ($query) {
-                return $query->attachment ?: null;
-            })
-            ->addColumn('attachment', function ($query) {
-                if ($query->attachment) {
-                    return sprintf('<a href="%s" target="_blank" class="text-blue-600 underline">View Attachment</a>', $query->attachment);
-                }
-
-                return '-';
+            ->addColumn('candidateType.name', function ($query) {
+                return $query->candidateType ? $query->candidateType->name : '-';
             })
             ->rawColumns(['action', 'photo', 'resume', 'attachment'])
             ->addIndexColumn();
@@ -110,7 +103,7 @@ class CandidateDataTable extends DataTable
     public function query(Candidate $model): QueryBuilder
     {
         return $model->query()->select('candidates.*')
-            ->with('votes', 'vision:id,candidate_id,vision', 'missions:id,candidate_id,point', 'programs:id,candidate_id,point');
+            ->with('votes', 'vision:id,candidate_id,vision', 'missions:id,candidate_id,point', 'candidateType:id,name');
     }
 
     /**
@@ -165,6 +158,9 @@ class CandidateDataTable extends DataTable
             Column::computed('photo_url')
                 ->title('Photo URL')
                 ->hidden(),
+            Column::make('candidateType.name')
+                ->title('Candidate Type')
+                ->addClass('text-center'),
             Column::make('head_name')
                 ->title('Head Name')
                 ->addClass('text-center'),
@@ -178,14 +174,6 @@ class CandidateDataTable extends DataTable
                 ->addClass('text-center'),
             Column::computed('resume_url')
                 ->title('Resume URL')
-                ->hidden(),
-            Column::computed('attachment')
-                ->title('Attachment')
-                ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center'),
-            Column::computed('attachment_url')
-                ->title('Attachment URL')
                 ->hidden(),
             Column::computed('action')
                 ->title('Action')

@@ -8,7 +8,7 @@ use App\Http\Requests\Dashboard\Candidate\StoreRequest;
 use App\Http\Requests\Dashboard\Candidate\UpdateRequest;
 use App\Models\Candidate;
 use App\Models\CandidateMission;
-use App\Models\CandidateProgram;
+use App\Models\CandidateType;
 use App\Models\CandidateVision;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +28,9 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        return view('dashboard.candidates.create');
+        $candidateType = CandidateType::select('id', 'name', 'is_active')->where('is_active', true)->get();
+
+        return view('dashboard.candidates.create', compact('candidateType'));
     }
 
     /**
@@ -47,26 +49,22 @@ class CandidateController extends Controller
                 'vice_name' => $data['vice_name'],
                 'photo' => $data['photo'] ?? null,
                 'resume' => $data['resume'] ?? null,
-                'attachment' => $data['attachment'] ?? null,
+                'is_blank' => $data['is_blank'],
+                'candidate_type_id' => $data['candidate_type_id'],
             ]);
 
-            CandidateVision::create([
-                'candidate_id' => $candidate->id,
-                'vision' => $data['vision'],
-            ]);
-
-            foreach ($data['missions'] as $mission) {
-                CandidateMission::create([
+            if (!$data['is_blank']) {
+                CandidateVision::create([
                     'candidate_id' => $candidate->id,
-                    'point' => $mission,
+                    'vision' => $data['vision']
                 ]);
-            }
 
-            foreach ($data['programs'] as $program) {
-                CandidateProgram::create([
-                    'candidate_id' => $candidate->id,
-                    'point' => $program,
-                ]);
+                foreach ($data['missions'] as $mission) {
+                    CandidateMission::create([
+                        'candidate_id' => $candidate->id,
+                        'point' => $mission,
+                    ]);
+                }
             }
 
             DB::commit();
@@ -109,7 +107,9 @@ class CandidateController extends Controller
      */
     public function edit(Candidate $candidate)
     {
-        return view('dashboard.candidates.update', compact('candidate'));
+        $candidateType = CandidateType::select('id', 'name', 'is_active')->where('is_active', true)->get();
+
+        return view('dashboard.candidates.update', compact('candidate', 'candidateType'));
     }
 
     /**
@@ -128,7 +128,8 @@ class CandidateController extends Controller
                 'vice_name' => $data['vice_name'],
                 'photo' => $data['photo'] ?? null,
                 'resume' => $data['resume'] ?? null,
-                'attachment' => $data['attachment'] ?? null,
+                'is_blank' => $data['is_blank'],
+                'candidate_type_id' => $data['candidate_type_id'],
             ];
 
             if (!isset($data['photo']) || empty($data['photo'])) {
@@ -145,24 +146,18 @@ class CandidateController extends Controller
 
             $candidate->update($payload);
 
-            $candidate->vision()->update([
-                'vision' => $data['vision'],
-            ]);
-
-            $candidate->missions()->delete();
-            foreach ($data['missions'] as $mission) {
-                CandidateMission::create([
-                    'candidate_id' => $candidate->id,
-                    'point' => $mission,
+            if (!$data['is_blank']) {
+                $candidate->vision()->update([
+                    'vision' => $data['vision'],
                 ]);
-            }
 
-            $candidate->programs()->delete();
-            foreach ($data['programs'] as $program) {
-                CandidateProgram::create([
-                    'candidate_id' => $candidate->id,
-                    'point' => $program,
-                ]);
+                $candidate->missions()->delete();
+                foreach ($data['missions'] as $mission) {
+                    CandidateMission::create([
+                        'candidate_id' => $candidate->id,
+                        'point' => $mission,
+                    ]);
+                }
             }
 
             DB::commit();

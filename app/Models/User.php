@@ -26,7 +26,8 @@ class User extends Authenticatable
         'socialite_id',
         'socialite_token',
     ];
-/**
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
@@ -61,5 +62,21 @@ class User extends Authenticatable
      */
     public function setCachePrefix(): string {
         return 'user.cache';
+    }
+
+    /**
+     * Get the batch that owns the user.
+     */
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+
+    /**
+     * Get the voter histories for the user.
+     */
+    public function voterHistories()
+    {
+        return $this->hasMany(VoterHistory::class);
     }
 }

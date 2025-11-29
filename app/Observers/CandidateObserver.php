@@ -20,10 +20,6 @@ class CandidateObserver
         $candidate->resume = $candidate->resume
             ? File::saveSingleFile(UploadFileType::CANDIDATE_DOCUMENT, $candidate->resume)
             : null;
-
-        $candidate->attachment = $candidate->attachment
-            ? File::saveSingleFile(UploadFileType::CANDIDATE_ATTACHMENT, $candidate->attachment)
-            : null;
     }
 
     /**
@@ -58,20 +54,6 @@ class CandidateObserver
                     : File::deleteFile(UploadFileType::CANDIDATE_DOCUMENT, $oldFile);
             }
         }
-
-        if ($candidate->isDirty('attachment') && ($candidate->attachment != null || $candidate->attachment != '')) {
-            $oldFile = $candidate->getOriginal('attachment', null);
-
-            if ($oldFile == null) {
-                $candidate->attachment = $candidate->attachment
-                    ? File::saveSingleFile(UploadFileType::CANDIDATE_ATTACHMENT, $candidate->attachment)
-                    : null;
-            } else {
-                $candidate->attachment = $candidate->attachment
-                    ? File::updateSingleFile(UploadFileType::CANDIDATE_ATTACHMENT, $candidate->attachment, $oldFile)
-                    : File::deleteFile(UploadFileType::CANDIDATE_ATTACHMENT, $oldFile);
-            }
-        }
     }
 
     /**
@@ -85,10 +67,6 @@ class CandidateObserver
 
         $candidate->resume
             ? File::deleteFile(UploadFileType::CANDIDATE_DOCUMENT, $candidate->resume)
-            : null;
-
-        $candidate->attachment
-            ? File::deleteFile(UploadFileType::CANDIDATE_ATTACHMENT, $candidate->attachment)
             : null;
     }
 }

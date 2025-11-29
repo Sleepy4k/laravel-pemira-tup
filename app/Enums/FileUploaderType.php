@@ -12,5 +12,4 @@ enum FileUploaderType: string
     case SETTING = 'setting';
     case CANDIDATE_PHOTO = 'candidate_photo';
     case CANDIDATE_RESUME = 'candidate_resume';
-    case CANDIDATE_ATTACHMENT = 'candidate_attachment';
 }

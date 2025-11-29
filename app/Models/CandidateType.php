@@ -20,6 +20,7 @@ class CandidateType extends Model
         'name',
         'slug',
         'description',
+        'is_active',
     ];
 
     /**
@@ -34,6 +35,7 @@ class CandidateType extends Model
             'name' => 'string',
             'slug' => 'string',
             'description' => 'string',
+            'is_active' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

@@ -36,29 +36,28 @@ class SigninController extends Controller
 
             if (!$user) {
                 Log::warning('Signin attempt with unregistered account: ' . $socialiteUser->getEmail());
-                return to_route('landing')->withErrors([
-                    'signin' => 'Your account is not registered in the system.',
-                ]);
+                return to_route('landing')->with('error', 'Your account is not registered in the system.');
             }
 
-            $user->update([
-                'socialite_id' => $socialiteUser->getId(),
-                'socialite_token' => $socialiteUser->token,
-            ]);
+            // Create or update user with socialite data
+            User::updateOrCreate(
+                ['email' => $encryptedEmail],
+                [
+                    'name' => $socialiteUser->getName(),
+                    'socialite_id' => $socialiteUser->getId(),
+                    'socialite_token' => $socialiteUser->token,
+                ]
+            );
 
             if (!Auth::attempt(['email' => $encryptedEmail, 'password' => 'password'])) {
                 Log::error('Failed to authenticate user after socialite sign-in: ' . $socialiteUser->getEmail());
-                return to_route('landing')->withErrors([
-                    'signin' => 'An error occurred during sign-in. Please try again.',
-                ]);
+                return to_route('landing')->with('error', 'An error occurred during sign-in. Please try again.');
             }
 
-            return to_route('landing')->with('status', 'Successfully signed in.');
+            return to_route('landing')->with('success', 'Successfully signed in.');
         } catch (\Throwable $th) {
             Log::error('Signin error: ' . $th->getMessage());
-            return to_route('landing')->withErrors([
-                'signin' => 'An error occurred during sign-in. Please try again.',
-            ]);
+            return to_route('landing')->with('error', 'An error occurred during sign-in. Please try again.');
         }
     }
 }

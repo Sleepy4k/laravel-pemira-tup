@@ -18,9 +18,9 @@ class Footer extends Component
     ) {
         $this->poweredBy = [
             [
-                'name' => 'SI Telkom University Purwokerto',
-                'url' => 'https://bis-pwt.telkomuniversity.ac.id',
-                'logo' => asset('images/si.png'),
+                'name' => 'PEMIRA TUP',
+                'url' => route('landing'),
+                'logo' => asset('images/pemira.png'),
             ],
             [
                 'name' => 'Telkom University Purwokerto',
