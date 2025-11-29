@@ -1,5 +1,5 @@
 <x-layout.error
     :status="401"
-    title="Unauthorized Access"
-    message="You do not have the necessary permissions to access this page."
+    title="We're sorry, but you are not authorized to access this page."
+    message="Please make sure you have the necessary permissions or contact the administrator if you believe this is an error."
 />

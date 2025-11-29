@@ -48,14 +48,7 @@
         <meta property="twitter:image:type" content="image/png">
         <meta property="twitter:image:alt" content="{{ $appSettings['app_name'] }} - {{ $title }}">
 
-        @vite([
-            'resources/css/app.css',
-            'resources/css/addon/landing.css',
-            'resources/js/lib/gsap.js',
-            'resources/js/app.js',
-            'resources/js/lib/boxicons.js',
-            'resources/js/addon/layout-landing.js'
-        ])
+        @vite(['resources/css/app.css', 'resources/css/addon/landing.css', 'resources/js/lib/gsap.js', 'resources/js/app.js', 'resources/js/lib/boxicons.js', 'resources/js/addon/layout-landing.js'])
 
         @stack('vites')
     </head>
@@ -66,11 +59,14 @@
 
         <x-landing.navbar :logo="$appSettings['app_logo']" />
 
-        <main class="h-full w-full mt-[15dvh] mb-40 px-4 md:px-[81.5px] space-y-[100px] lg:space-y-[150px] xl:space-y-[200px]">
+        <main
+            class="h-full w-full mt-[15dvh] mb-40 px-4 md:px-[81.5px] space-y-[100px] lg:space-y-[150px] xl:space-y-[200px]">
             {{ $slot }}
         </main>
 
         <x-landing.footer :logo="$appSettings['app_logo']" :appName="$appSettings['app_name']" />
+
+        <x-landing.signin-confirmation />
 
         <x-utils.noscript />
     </body>

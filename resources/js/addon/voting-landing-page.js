@@ -1,27 +1,79 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // create a gsap timeline
-    const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+document.addEventListener("DOMContentLoaded", () => {
+    const masterTl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // animate the info card
-    tl.fromTo('#info-card', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 });
+    masterTl
+        .to("#info-card", {
+            autoAlpha: 1, // GSAP's special property for visibility + opacity
+            duration: 0,
+        })
+        .from("#info-card", {
+            y: -50,
+            opacity: 0,
+            duration: 1.5,
+            ease: "back.out(1.5)", // Bounce effect
+        })
+        // Animate children with class .stagger-item
+        .from(
+            ".stagger-item",
+            {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.3, // Time between each item appearing
+            },
+            "-=0.8"
+        );
 
-    // animate stagger items
-    tl.fromTo('.stagger-item',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, stagger: 0.2 },
-        "-=0.3" // overlap with previous animation
+    gsap.set(".voting-type-card", { autoAlpha: 1 });
+
+    gsap.from(".voting-type-card", {
+        scrollTrigger: {
+            trigger: ".voting-type-grid",
+            start: "top 85%", // Start animation when top of grid hits 85% of viewport
+            toggleActions: "play none none reverse", // Play on enter, reverse on leave
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.5, // Delay between each card
+        ease: "power2.out",
+    });
+
+    if (!document.querySelector(".voting-type-card")) {
+        gsap.from(".voting-type-grid > div", {
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            delay: 0.5,
+            ease: "power2.out",
+        });
+    }
+
+    function showNotification(message, type = "info") {
+        if (typeof window.Toast !== "undefined") {
+            Toast.fire({
+                icon: type,
+                title: message,
+            });
+        } else {
+            alert(message);
+        }
+    }
+
+    // Check for success or error messages in the header data attributes
+    const header = document.querySelector(
+        "header-meta[data-success], header-meta[data-error]"
     );
+    if (header) {
+        const successMessage = header.getAttribute("data-success");
+        const errorMessage = header.getAttribute("data-error");
 
-    // animate the voting type cards
-    tl.fromTo('.voting-type-card',
-        { y: 50, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)", stagger: 0.2 },
-        "-=0.2" // overlap with previous animation
-    );
+        if (successMessage) {
+            showNotification(successMessage, "success");
+        }
 
-    tl.fromTo('.cta-button',
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5 },
-        "-=0.4" // overlap with previous animation
-    );
+        if (errorMessage) {
+            showNotification(errorMessage, "error");
+        }
+    }
 });

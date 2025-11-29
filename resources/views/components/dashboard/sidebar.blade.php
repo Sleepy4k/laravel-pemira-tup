@@ -3,7 +3,7 @@
     <div class="h-full flex flex-col">
         <a href="{{ route('landing') }}"
             class="px-4 lg:px-6 py-3 flex items-center justify-center border-b border-neutral-200 sticky top-0 bg-white z-10">
-            <img src="{{ $appLogo }}" alt="Logo" loading="lazy" class="w-10 h-12" />
+            <img src="{{ $appLogo }}" alt="Logo" loading="lazy" class="w-12 h-12" />
             <div class='m-1'></div>
             <span class="text-xl font-bold text-primary-500">{{ $appName }}</span>
         </a>

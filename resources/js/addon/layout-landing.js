@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
+                    cancelButtonColor: "#6c757d",
                     confirmButtonText: "Ya, logout!",
                     cancelButtonText: "Batal",
                 }).then((result) => {
@@ -61,6 +61,53 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         });
+    }
+
+    const signinButton = document.querySelectorAll("#signin-button");
+    const modal = document.getElementById('sso-modal');
+    const backdrop = document.getElementById('sso-modal-backdrop');
+    const panel = document.getElementById('sso-modal-panel');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const closeXBtn = document.getElementById('close-modal-x');
+    const proceedBtn = document.getElementById('proceed-sso-btn');
+
+    if (signinButton && modal && backdrop && panel && closeBtn && proceedBtn) {
+        signinButton.forEach(button => {
+            button.addEventListener("click", function () {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    panel.classList.remove('opacity-0', 'scale-95');
+                    panel.classList.add('opacity-100', 'scale-100');
+                }, 10);
+            });
+        });
+
+        function closeModal() {
+            backdrop.classList.add('opacity-0');
+            panel.classList.remove('opacity-100', 'scale-100');
+            panel.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        proceedBtn.addEventListener('click', function () {
+            // change the button state to loading
+            proceedBtn.disabled = true;
+            proceedBtn.innerHTML = 'Loading...';
+
+            const redirectUrl = proceedBtn.getAttribute('data-redirect');
+            if (redirectUrl) {
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 500); // small delay to show loading state
+            }
+        });
+
+        backdrop.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', closeModal);
+        closeXBtn.addEventListener('click', closeModal);
     }
 
     // handle loader

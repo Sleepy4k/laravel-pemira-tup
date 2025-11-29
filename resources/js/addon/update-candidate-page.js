@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // instantiate for missions and programs
     createListManager({
         name: "missions",
-        max: 3,
+        max: 10,
         previewId: "missions-preview",
         containerId: "missions-input-container",
         addBtnId: "add-mission-btn",
@@ -243,20 +243,6 @@ document.addEventListener("DOMContentLoaded", function () {
             'input[name="mission"]',
             "#mission",
             "#mission-input",
-        ],
-    });
-
-    createListManager({
-        name: "programs",
-        max: 5,
-        previewId: "programs-preview",
-        containerId: "programs-input-container",
-        addBtnId: "add-program-btn",
-        inputSelectors: [
-            'input[data-role="program-input"]',
-            'input[name="program"]',
-            "#program",
-            "#program-input",
         ],
     });
 
@@ -367,5 +353,61 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     setupFilePreview("resume", "resume-preview-container");
-    setupFilePreview("attachment", "attachment-preview-container");
+
+    // handle is_blank checkbox to disable/enable inputs
+    const isBlankCheckbox = document.getElementById("is_blank");
+    const relatedInputs = [
+        "resume",
+        "vision",
+        "missions-input-container",
+    ]
+        .map((id) => document.getElementById(id))
+        .filter((el) => el !== null);
+
+    if (isBlankCheckbox) {
+            const toggleRelatedInputs = () => {
+            const disabled = isBlankCheckbox.value === "1";
+            relatedInputs.forEach((el) => {
+                // handle input/select/textarea elements
+                if (
+                    el.tagName === "INPUT" ||
+                    el.tagName === "SELECT" ||
+                    el.tagName === "TEXTAREA"
+                ) {
+                    el.disabled = disabled;
+                    if (disabled) {
+                        el.classList.add("bg-gray-100", "cursor-not-allowed");
+                    } else {
+                        el.classList.remove("bg-gray-100", "cursor-not-allowed");
+                    }
+                } else {
+                    // for containers, disable/enable all child inputs
+                    const childInputs = el.querySelectorAll(
+                        'input, select, textarea, button'
+                    );
+                    childInputs.forEach((child) => {
+                        child.disabled = disabled;
+                        if (disabled) {
+                            child.classList.add(
+                                "bg-gray-100",
+                                "cursor-not-allowed"
+                            );
+                        } else {
+                            child.classList.remove(
+                                "bg-gray-100",
+                                "cursor-not-allowed"
+                            );
+                        }
+                    });
+                }
+            });
+        };
+
+        // initial toggle on page load
+        toggleRelatedInputs();
+
+        isBlankCheckbox.addEventListener("change", function () {
+            toggleRelatedInputs();
+        });
+    }
 });

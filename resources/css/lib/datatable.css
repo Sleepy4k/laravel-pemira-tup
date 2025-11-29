@@ -170,7 +170,7 @@ table.dataTable thead>tr>th.dt-ordering-desc span.dt-column-order:after,
 table.dataTable thead>tr>td.dt-ordering-asc span.dt-column-order:before,
 table.dataTable thead>tr>td.dt-ordering-desc span.dt-column-order:after {
     opacity: 1;
-    color: #FA9A44;
+    color: var(--color-secondary-600);
 }
 
 /* Header Layout */
@@ -228,7 +228,7 @@ div.dt-processing>div:last-child>div {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #FA9A44;
+    background: var(--color-secondary-600);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
@@ -470,7 +470,7 @@ div.dt-container .dt-length select:hover {
 
 div.dt-container .dt-length select:focus {
     outline: none;
-    border-color: #FA9A44;
+    border-color: var(--color-secondary-600);
     box-shadow: 0 0 0 3px rgba(250, 154, 68, 0.1);
 }
 
@@ -520,7 +520,7 @@ div.dt-container .dt-paging {
 
 div.dt-container .dt-search input:focus {
     outline: none;
-    border-color: #FA9A44;
+    border-color: var(--color-secondary-600);
     box-shadow: 0 0 0 3px rgba(250, 154, 68, 0.1);
 }
 
@@ -555,8 +555,8 @@ div.dt-container .dt-paging .dt-paging-button {
 div.dt-container .dt-paging .dt-paging-button.current,
 div.dt-container .dt-paging .dt-paging-button.current:hover {
     color: white !important;
-    border-color: #FA9A44;
-    background: linear-gradient(135deg, #FA9A44 0%, #E57618 100%);
+    border-color: var(--color-secondary-600);
+    background: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-700) 100%);
     box-shadow: 0 4px 8px rgba(250, 154, 68, 0.25);
     transform: translateY(-1px);
 }
@@ -748,7 +748,7 @@ html.dark table.dataTable>tbody>tr.child span.dtr-title {
 }
 
 .dt-button {
-    background: #FA9A44;
+    background: var(--color-secondary-600);
     border: none;
     color: #000000;
     padding: 0.35rem 1rem;
@@ -772,13 +772,13 @@ html.dark table.dataTable>tbody>tr.child span.dtr-title {
 }
 
 .dt-button:hover {
-    background: #E57618;
+    background: var(--color-secondary-700);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
 }
 
 .dt-button:active {
-    background: #E57618;
+    background: var(--color-secondary-700);
     transform: translateY(0);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }

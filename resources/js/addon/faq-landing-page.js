@@ -1,20 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 1 } });
 
-    tl.from("main section:first-child img", {
-        scale: 0.5,
+    tl.from("main h1", {
+        y: 150,
         opacity: 0,
         duration: 1.5,
-        ease: "back.out(1.7)",
     })
         .from(
-            "main h1",
+            "main #separator-line",
             {
-                y: 30,
-                opacity: 0,
+                width: 0,
                 duration: 0.8,
+                ease: "power2.inOut",
             },
-            "-=0.8"
+            "-=0.6"
         )
         // Animate each FAQ item
         .from(
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "-=0.6"
         );
 
-    // FAQ Accordion Functionality
     const faqItems = document.querySelectorAll(".faq-item");
 
     if (faqItems) {

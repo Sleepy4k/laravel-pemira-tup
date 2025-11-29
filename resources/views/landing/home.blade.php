@@ -3,11 +3,13 @@
         @vite(['resources/js/addon/home-landing-page.js'])
     @endPushOnce
 
+    <header-meta data-success="{{ session('success') }}" data-error="{{ session('error') }}"></header-meta>
+
     <section class="flex flex-col items-center">
-        <img alt="Artwork Pemira 2024" loading="lazy" width="309" height="308" decoding="async" class="bg-radial-primary"
-            src="{{ asset('images/telkom.webp') }}" style="color: transparent;" />
+        <img alt="Artwork Pemira {{ date('Y') }}" loading="lazy" width="309" height="308" class="bg-radial-primary"
+            src="{{ asset('images/telkom.webp') }}" style="color: transparent;" id="artwork-pemira" />
         <h1 class="text-4xl md:text-5xl font-bold text-primary-600 mb-3 mt-6">Selamat Datang!</h1>
-        <div class="place-items-center bg-tertiary-400 h-[4px] w-full lg:w-3/4 my-4 md:my-9"></div>
+        <div class="place-items-center bg-tertiary-400 h-[4px] w-full lg:w-3/4 my-4 md:my-9" id="separator-line"></div>
         <p class="text-xl md:text-2xl font-bold text-gray-800 max-w-2xl leading-relaxed text-center">
             Pemilihan Raya Ikatan Keluarga Mahasiswa Universitas Telkom Purwokerto
             {{ date('Y') }}
@@ -31,7 +33,7 @@
             </div>
 
             <div class="flex-1 flex justify-center md:justify-end z-10">
-                <img src="{{ $appLogo }}" alt="Ilustrasi Kotak Suara" class="w-64 md:w-80 h-auto object-contain">
+                <img src="{{ $appLogo }}" alt="Ilustrasi Kotak Suara" class="w-64 md:w-80 h-auto object-contain" id="ballot-box" />
             </div>
         </div>
     </section>

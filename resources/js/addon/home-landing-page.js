@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 1 } });
 
-    tl.from("main section:first-child img", {
+    tl.from("main #artwork-pemira", {
         scale: 0.5,
         opacity: 0,
         duration: 1.5,
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "-=0.8"
         )
         .from(
-            "main .bg-brand-accent",
+            "main #separator-line",
             {
                 width: 0,
                 duration: 0.8,
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
     // This makes the ballot box move up and down gently forever
-    gsap.to("main section:nth-child(2) img", {
+    gsap.to("main #ballot-box", {
         y: -15, // Move up 15px
         duration: 2,
         yoyo: true, // Go back down
@@ -55,4 +55,27 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: 1,
         ease: "power3.out",
     });
+
+    function showNotification(message, type = "info") {
+        if (typeof window.Toast !== "undefined") {
+            Toast.fire({
+                icon: type,
+                title: message,
+            });
+        } else {
+            alert(message);
+        }
+    }
+
+    const headerMeta = document.querySelector("header-meta[data-success], header-meta[data-error]");
+    if (headerMeta) {
+        const successMessage = headerMeta.getAttribute("data-success");
+        const errorMessage = headerMeta.getAttribute("data-error");
+
+        if (successMessage) {
+            showNotification(successMessage, "success");
+        } else if (errorMessage) {
+            showNotification(errorMessage, "error");
+        }
+    }
 });

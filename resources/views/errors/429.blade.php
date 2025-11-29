@@ -1,5 +1,5 @@
 <x-layout.error
     :status="429"
-    title="Too Many Requests"
-    message="You have sent too many requests in a given amount of time. Please try again later."
+    title="Not so fast! We've detected too many requests from your side."
+    message="To protect our services, we've temporarily limited your access. Please wait a moment before trying again."
 />

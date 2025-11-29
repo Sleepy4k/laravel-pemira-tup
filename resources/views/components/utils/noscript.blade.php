@@ -64,7 +64,7 @@
             font-size: clamp(13px, 3vw, 15px);
             color: #495057;
             line-height: 1.7;
-            border-left: 4px solid #0d6efd;
+            border-left: 4px solid #BB0808;
         }
 
         .noscript-instructions strong {

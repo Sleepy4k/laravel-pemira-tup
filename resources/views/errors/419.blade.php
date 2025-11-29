@@ -1,5 +1,5 @@
 <x-layout.error
     :status="419"
-    title="Page Expired"
-    message="The page has expired due to inactivity. Please refresh and try again."
+    title="Current page credentials have expired."
+    message="Every page session has a limited time span for security reasons. Please refresh the page and try again."
 />

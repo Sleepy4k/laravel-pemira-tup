@@ -36,7 +36,7 @@
                 @method('DELETE')
             </form>
         @else
-            <button id="nav-button" data-redirect="{{ route('signin') }}"
+            <button id="signin-button"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signin
                 dengan SSO</button>
         @endif
@@ -72,7 +72,7 @@
             <button id="logout-button-mobile" onclick="document.getElementById('logout-form').submit();"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signout</button>
         @else
-            <button id="nav-button" data-redirect="{{ route('signin') }}"
+            <button id="signin-button"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signin
                 dengan SSO</button>
         @endif

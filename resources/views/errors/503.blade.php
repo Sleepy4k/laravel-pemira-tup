@@ -1,5 +1,5 @@
 <x-layout.error
     :status="503"
-    title="Service Unavailable"
-    message="The server is currently unable to handle the request due to maintenance or overload."
+    title="The day has come, server is under maintenance."
+    message="To ensure the best experience, we are currently performing scheduled maintenance. Please check back soon."
 />
