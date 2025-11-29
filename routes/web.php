@@ -25,9 +25,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landing\HomeController::class)->name('landing');
 Route::get('/faq', Landing\FaqController::class)->name('faq');
-Route::get('/voting', Landing\VotingController::class)->name('voting');
-Route::get('/voting/{type:slug}/candidate', Landing\VoteCandidateController::class.'@show')->name('vote-candidate');
-Route::post('/voting/{type:slug}/{candidate}', Landing\VoteCandidateController::class.'@update')->name('vote-candidate.submit');
 
 Route::get('storage/{path}', ServeController::class)->where('path', '.*')
     ->middleware('throttle:15,1');
@@ -43,37 +40,43 @@ Route::get('storage/{path}', ServeController::class)->where('path', '.*')
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', HomeController::class)->name('dashboard');
+    Route::get('/voting', Landing\VotingController::class)->name('voting');
+    Route::get('/voting/{type:slug}/candidate', Landing\VoteCandidateController::class.'@show')->name('vote-candidate');
+    Route::post('/voting/{type:slug}/{candidate}', Landing\VoteCandidateController::class.'@update')->name('vote-candidate.submit');
 
-    Route::prefix('profile')->name('profile.')->group(function () {
-        Route::get('/account', Profile\AccountController::class)->name('account');
-        Route::resource('/setting', Profile\SettingController::class)->only(['index', 'store']);
-        Route::resource('/security', Profile\SecurityController::class)->only(['index', 'store']);
-    });
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', HomeController::class)->name('dashboard');
 
-    Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::resource('/candidates', Candidate\CandidateController::class);
-        Route::resource('/settings', Setting\SettingController::class)->only(['index', 'store', 'update']);
-
-        Route::prefix('/voters')->name('voters.')->group(function () {
-            Route::controller(Voter\VoterDataController::class)->group(function () {
-                Route::post('/import', 'import')->name('import');
-                Route::get('/template', 'template')->name('template');
-            });
-
-            Route::controller(Voter\VoterTokenController::class)->group(function () {
-                Route::post('/{voter}/send-notification', 'sendNotification')->name('send-notification');
-                Route::post('/bulk-send-notification', 'bulkSendNotification')->name('bulk-send-notification');
-            });
+        Route::prefix('profile')->name('profile.')->group(function () {
+            Route::get('/account', Profile\AccountController::class)->name('account');
+            Route::resource('/setting', Profile\SettingController::class)->only(['index', 'store']);
+            Route::resource('/security', Profile\SecurityController::class)->only(['index', 'store']);
         });
 
-        Route::resources([
-            '/admins' => Admin\AdminController::class,
-            '/voters' => Voter\VoterController::class,
-            '/batches' => Batch\BatchController::class,
-            '/voting' => Setting\VotingController::class,
-            '/sessions' => Session\SessionController::class,
-            '/timelines' => Timeline\TimelineController::class,
-        ], ['except' => ['create', 'show', 'edit']]);
+        Route::prefix('dashboard')->name('dashboard.')->group(function () {
+            Route::resource('/candidates', Candidate\CandidateController::class);
+            Route::resource('/settings', Setting\SettingController::class)->only(['index', 'store', 'update']);
+
+            Route::prefix('/voters')->name('voters.')->group(function () {
+                Route::controller(Voter\VoterDataController::class)->group(function () {
+                    Route::post('/import', 'import')->name('import');
+                    Route::get('/template', 'template')->name('template');
+                });
+
+                Route::controller(Voter\VoterTokenController::class)->group(function () {
+                    Route::post('/{voter}/send-notification', 'sendNotification')->name('send-notification');
+                    Route::post('/bulk-send-notification', 'bulkSendNotification')->name('bulk-send-notification');
+                });
+            });
+
+            Route::resources([
+                '/admins' => Admin\AdminController::class,
+                '/voters' => Voter\VoterController::class,
+                '/batches' => Batch\BatchController::class,
+                '/voting' => Setting\VotingController::class,
+                '/sessions' => Session\SessionController::class,
+                '/timelines' => Timeline\TimelineController::class,
+            ], ['except' => ['create', 'show', 'edit']]);
+        });
     });
 });
