@@ -31,73 +31,100 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const logoutButton = document.getElementById("logout-button");
-    if (logoutButton) {
+    const logoutButtonMobile = document.getElementById("logout-button-mobile");
+    const logoutModal = document.getElementById("logout-modal");
+    const logoutBackdrop = document.getElementById("logout-modal-backdrop");
+    const logoutPanel = document.getElementById("logout-modal-panel");
+    const logoutCloseBtn = document.getElementById("close-modal-btn");
+    const logoutCloseXBtn = document.getElementById("close-modal-x");
+    const logoutProceedBtn = document.getElementById("proceed-logout-btn");
+
+    if (
+        logoutButton &&
+        logoutModal &&
+        logoutBackdrop &&
+        logoutPanel &&
+        logoutCloseBtn &&
+        logoutProceedBtn
+    ) {
         logoutButton.addEventListener("click", function () {
-            if (typeof window.Swal === "function") {
-                Swal.fire({
-                    title: "Apakah Anda yakin ingin sign out?",
-                    text: "Anda akan diarahkan ke halaman utama.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#6c757d",
-                    confirmButtonText: "Ya, logout!",
-                    cancelButtonText: "Batal",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const logoutForm =
-                            document.getElementById("logout-form");
-                        if (logoutForm) {
-                            logoutForm.submit();
-                        }
-                    }
-                });
-            } else {
-                if (confirm("Apakah Anda yakin ingin sign out?")) {
-                    const logoutForm = document.getElementById("logout-form");
-                    if (logoutForm) {
-                        logoutForm.submit();
-                    }
-                }
+            logoutModal.classList.remove("hidden");
+            setTimeout(() => {
+                logoutBackdrop.classList.remove("opacity-0");
+                logoutPanel.classList.remove("opacity-0", "scale-95");
+                logoutPanel.classList.add("opacity-100", "scale-100");
+            }, 10);
+        });
+
+        logoutButtonMobile.addEventListener("click", function () {
+            logoutModal.classList.remove("hidden");
+            setTimeout(() => {
+                logoutBackdrop.classList.remove("opacity-0");
+                logoutPanel.classList.remove("opacity-0", "scale-95");
+                logoutPanel.classList.add("opacity-100", "scale-100");
+            }, 10);
+        });
+
+        function closeLogoutModal() {
+            logoutBackdrop.classList.add("opacity-0");
+            logoutPanel.classList.remove("opacity-100", "scale-100");
+            logoutPanel.classList.add("opacity-0", "scale-95");
+            setTimeout(() => {
+                logoutModal.classList.add("hidden");
+            }, 200);
+        }
+
+        logoutProceedBtn.addEventListener("click", function () {
+            // change the button state to loading
+            logoutProceedBtn.disabled = true;
+            logoutProceedBtn.innerHTML = "Loading...";
+
+            const logoutForm = document.getElementById("logout-form");
+            if (logoutForm) {
+                logoutForm.submit();
             }
         });
+
+        logoutBackdrop.addEventListener("click", closeLogoutModal);
+        logoutCloseBtn.addEventListener("click", closeLogoutModal);
+        logoutCloseXBtn.addEventListener("click", closeLogoutModal);
     }
 
     const signinButton = document.querySelectorAll("#signin-button");
-    const modal = document.getElementById('sso-modal');
-    const backdrop = document.getElementById('sso-modal-backdrop');
-    const panel = document.getElementById('sso-modal-panel');
-    const closeBtn = document.getElementById('close-modal-btn');
-    const closeXBtn = document.getElementById('close-modal-x');
-    const proceedBtn = document.getElementById('proceed-sso-btn');
+    const modal = document.getElementById("sso-modal");
+    const backdrop = document.getElementById("sso-modal-backdrop");
+    const panel = document.getElementById("sso-modal-panel");
+    const closeBtn = document.getElementById("close-modal-btn");
+    const closeXBtn = document.getElementById("close-modal-x");
+    const proceedBtn = document.getElementById("proceed-sso-btn");
 
     if (signinButton && modal && backdrop && panel && closeBtn && proceedBtn) {
-        signinButton.forEach(button => {
+        signinButton.forEach((button) => {
             button.addEventListener("click", function () {
-                modal.classList.remove('hidden');
+                modal.classList.remove("hidden");
                 setTimeout(() => {
-                    backdrop.classList.remove('opacity-0');
-                    panel.classList.remove('opacity-0', 'scale-95');
-                    panel.classList.add('opacity-100', 'scale-100');
+                    backdrop.classList.remove("opacity-0");
+                    panel.classList.remove("opacity-0", "scale-95");
+                    panel.classList.add("opacity-100", "scale-100");
                 }, 10);
             });
         });
 
         function closeModal() {
-            backdrop.classList.add('opacity-0');
-            panel.classList.remove('opacity-100', 'scale-100');
-            panel.classList.add('opacity-0', 'scale-95');
+            backdrop.classList.add("opacity-0");
+            panel.classList.remove("opacity-100", "scale-100");
+            panel.classList.add("opacity-0", "scale-95");
             setTimeout(() => {
-                modal.classList.add('hidden');
+                modal.classList.add("hidden");
             }, 200);
         }
 
-        proceedBtn.addEventListener('click', function () {
+        proceedBtn.addEventListener("click", function () {
             // change the button state to loading
             proceedBtn.disabled = true;
-            proceedBtn.innerHTML = 'Loading...';
+            proceedBtn.innerHTML = "Loading...";
 
-            const redirectUrl = proceedBtn.getAttribute('data-redirect');
+            const redirectUrl = proceedBtn.getAttribute("data-redirect");
             if (redirectUrl) {
                 setTimeout(() => {
                     window.location.href = redirectUrl;
@@ -105,9 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        backdrop.addEventListener('click', closeModal);
-        closeBtn.addEventListener('click', closeModal);
-        closeXBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener("click", closeModal);
+        closeBtn.addEventListener("click", closeModal);
+        closeXBtn.addEventListener("click", closeModal);
     }
 
     // handle loader

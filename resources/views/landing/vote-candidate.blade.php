@@ -3,7 +3,7 @@
         @vite(['resources/js/addon/vote-candidate-landing-page.js'])
     @endPushOnce
 
-    <div class="fixed top-6 left-6 z-50 mt-[8dvh]">
+    <div class="fixed top-6 left-6 z-25 mt-[8dvh]">
         <a href="{{ route('voting') }}"
             class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-lg border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:shadow-xl transition-all duration-300">
             <box-icon name="arrow-back" class="h-5 w-5"></box-icon>
@@ -19,7 +19,7 @@
                 </p>
             </div>
 
-            @forelse ($type->candidates as $index => $candidate)
+            @forelse ($type->candidates as $candidate)
                 @if ($candidate->is_blank)
                     <div class="max-w-6xl w-full mx-auto mb-12 last:mb-0">
                         <div
@@ -34,7 +34,7 @@
 
                                 <div class="absolute bottom-0 left-0 w-full p-6 text-white">
                                     <p class="text-xs font-medium opacity-80 uppercase tracking-widest mb-1">Pilihan Alternatif</p>
-                                    <h2 class="text-3xl font-bold leading-tight">Nomor Urut {{ $index + 1 }}</h2>
+                                    <h2 class="text-3xl font-bold leading-tight">Nomor Urut {{ $candidate->number }}</h2>
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
 
                                 <div class="absolute bottom-0 left-0 w-full p-6 text-white">
                                     <p class="text-xs font-medium opacity-80 uppercase tracking-widest mb-1">Kandidat</p>
-                                    <h2 class="text-3xl font-bold leading-tight">Nomor Urut {{ $index + 1 }}</h2>
+                                    <h2 class="text-3xl font-bold leading-tight">Nomor Urut {{ $candidate->number }}</h2>
                                 </div>
                             </div>
 

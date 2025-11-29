@@ -1,11 +1,11 @@
-<div id="sso-modal" class="relative z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div id="sso-modal-backdrop"
+<div id="logout-modal" class="relative z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="logout-modal-backdrop"
         class="fixed inset-0 bg-gray-900/60 backdrop-blur-md transition-opacity duration-300 ease-out opacity-0">
     </div>
 
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div id="sso-modal-panel"
+            <div id="logout-modal-panel"
                 class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all duration-300 ease-out w-full max-w-sm sm:max-w-lg border border-gray-100 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 mx-auto">
                 <div
                     class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-brand-primary/10 to-brand-secondary/10 -z-10">
@@ -33,25 +33,25 @@
                         </div>
 
                         <h3 class="text-2xl font-bold leading-tight text-gray-900 mb-2" id="modal-title">
-                            Mahasiswa Aktif TUP?
+                            Apakah Kamu Yakin Ingin Keluar?
                         </h3>
 
                         <p class="text-sm text-gray-500 leading-relaxed max-w-sm mx-auto">
-                            Pastikan status kemahasiswaan Anda aktif untuk berpartisipasi. Silakan masuk menggunakan
-                            akun <span class="font-semibold text-brand-primary">SSO Telkom University</span> Anda.
+                            Kamu akan diminta untuk masuk kembali melalui SSO untuk mengakses akunmu.
+                            Dengan melanjutkan, kamu akan keluar dari sesi saat ini.
                         </p>
                     </div>
                 </div>
 
                 <div
                     class="bg-gray-50/50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse sm:gap-3 border-t border-gray-100">
-                    <button type="button" id="proceed-sso-btn" data-redirect="{{ route('signin') }}"
+                    <button type="button" id="proceed-logout-btn"
                         class="inline-flex w-full justify-center items-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-600/30 hover:bg-primary-700 hover:shadow-primary-700/30 hover:-translate-y-0.5 transition-all duration-200 sm:w-auto cursor-pointer">
-                        <span>Lanjut ke SSO</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-4 h-4">
+                        <span>Ya, Keluar!</span>
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
                     </button>
                     <button type="button" id="close-modal-btn"

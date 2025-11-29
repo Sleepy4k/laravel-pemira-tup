@@ -66,7 +66,16 @@
 
         <x-landing.footer :logo="$appSettings['app_logo']" :appName="$appSettings['app_name']" />
 
-        <x-landing.signin-confirmation />
+        @auth
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+                @method('DELETE')
+            </form>
+
+            <x-landing.signout-confirmation />
+        @else
+            <x-landing.signin-confirmation />
+        @endauth
 
         <x-utils.noscript />
     </body>

@@ -88,13 +88,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 } else {
                     Swal.fire({
-                        title: "Apakah Anda yakin?",
-                        text: "Anda tidak dapat mengubah pilihan setelah dikonfirmasi.",
-                        icon: "question",
+                        title: "Konfirmasi Pilihan",
+                        text: "Apakah Anda yakin ingin memilih kandidat ini? Pilihan tidak dapat diubah setelah dikonfirmasi.",
+                        icon: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#6c757d",
-                        confirmButtonText: "Ya, pilih!",
+                        confirmButtonText: "Ya, Pilih Kandidat",
                         cancelButtonText: "Batal",
                     }).then((result) => {
                         if (result.isConfirmed) {

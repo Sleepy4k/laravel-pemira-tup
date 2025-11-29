@@ -30,11 +30,6 @@
 
             <button id="logout-button"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signout</button>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                @csrf
-                @method('DELETE')
-            </form>
         @else
             <button id="signin-button"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signin
@@ -69,7 +64,7 @@
                     class="hover:text-primary-600 transition-colors cursor-pointer">Dashboard</button>
             @endif
 
-            <button id="logout-button-mobile" onclick="document.getElementById('logout-form').submit();"
+            <button id="logout-button-mobile"
                 class="bg-primary-600 text-white px-6 py-2.5 rounded-full hover:bg-primary-800 transition-all shadow-md cursor-pointer">Signout</button>
         @else
             <button id="signin-button"
