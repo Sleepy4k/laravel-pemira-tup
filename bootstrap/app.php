@@ -30,7 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\CheckIsUserAdmin::class,
         ]);
 
-        $middleware->redirectGuestsTo(fn () => route('signin'));
+        $middleware->redirectGuestsTo(fn () => route('landing'));
         $middleware->redirectUsersTo(fn () => route('dashboard'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
